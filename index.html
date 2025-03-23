@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Digital</title>
+    <link href="src/output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Work+Sans:wght@100..900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-size: 1.2rem;
+            font-family: "Work Sans", sans-serif;
+        }
+
+        .font-sacramento {
+            font-family: "Sacramento", cursive;
+        }
+
+        #galeri img {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #galeri img:hover {
+            transform: scale(1.05);
+        }
+
+        #mempelai img {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #mempelai img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+    <script>
+        function openInvitation() {
+            document.getElementById('landing-page').classList.add('hidden');
+            const invitation = document.getElementById('invitation-content');
+            invitation.classList.remove('hidden');
+            setTimeout(() => {
+                invitation.classList.remove('opacity-0', 'translate-y-10');
+            }, 50);
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const photos = document.querySelectorAll('.gallery-photo');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.remove('opacity-0', 'scale-90');
+                            entry.target.classList.add('opacity-100', 'scale-100');
+                        }, index * 200);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            photos.forEach(photo => observer.observe(photo));
+        });
+
+        function toggleAudio() {
+        const audio = document.getElementById("background-audio");
+        const icon = document.getElementById("volume-icon");
+
+        if (audio.paused) {
+            audio.play();
+            icon.innerHTML = `
+                <path d="M11.536 14.01A8.47 8.47 0 0 0 14.026 8a8.47 8.47 0 0 0-2.49-6.01l-.708.707A7.48 7.48 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303z"/>
+                <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.48 5.48 0 0 1 11.025 8a5.48 5.48 0 0 1-1.61 3.89z"/>
+                <path d="M10.025 8a4.5 4.5 0 0 1-1.318 3.182L8 10.475A3.5 3.5 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.5 4.5 0 0 1 10.025 8M7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11"/>
+            `;
+        } else {
+            audio.pause();
+            audio.currentTime = 0;
+            icon.innerHTML = `
+                <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06m7.137 2.096a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0"/>
+            `;
+        }
+    }
+    </script>
+</head>
+
+<body class="bg-background text-accent">
+    <section id="landing-page" class="flex items-center justify-center min-h-screen text-center bg-cover bg-center px-4"
+        style="background-image: url('src/img/bg-landing-page.jpg');">
+        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="relative flex flex-col justify-between items-center w-full max-w-md text-white min-h-screen py-12">
+            <div class="mt-16 text-center">
+                <p class="text-xl uppercase tracking-widest">The Wedding Of</p>
+                <h1 class="text-6xl font-sacramento mt-2">Putra & Putri</h1>
+            </div>
+            <div class="bg-black/40 backdrop-blur-md p-6 rounded-lg text-center w-full mx-4">
+                <p class="text-sm">Kepada Yth;</p>
+                <p class="text-lg font-bold">Bapak/Ibu/Saudara/i</p>
+                <p class="text-sm">Di Tempat</p>
+            </div>
+            <button onclick="openInvitation()"
+                class="mb-8 w-full max-w-xs px-6 py-3 bg-primary text-white rounded-full shadow-md">Open
+                Invitation</button>
+        </div>
+    </section>
+
+    <section id="invitation-content"
+    class="hidden opacity-0 transform translate-y-10 transition-all duration-700 ease-in-out"
+        >
+        <audio id="background-audio" autoplay loop>
+            <source src="src/audio/backsound.mp3" type="audio/mp3">
+        </audio>
+        <section id="hero"
+            class="relative flex items-center justify-center min-h-screen text-center bg-cover bg-center px-4"
+            style="background-image: url('src/img/bg-hero-section.jpg');">
+            <div class="absolute inset-0 bg-white/85"></div>
+            <div class="relative text-center max-w-sm sm:max-w-md px-4">
+                <h1 class="text-4xl md:text-6xl font-sacramento text-primary font-extrabold">Walimatul Nikah</h1>
+                <h2 class="text-3xl md:text-4xl font-sacramento mt-2 mb-10 font-semibold">Putra & Putri</h2>
+
+                <div class="flex gap-2 md:gap-4 mb-8 justify-center">
+                    <p>-</p>
+                    <p class="text-lg md:text-xl">25 Januari 2024</p>
+                    <p>-</p>
+                </div>
+
+                <div class="mt-4 flex justify-center gap-2 md:gap-4">
+                    <div
+                        class="bg-primary text-white px-3 py-2 md:px-4 md:py-3 rounded-lg shadow-md text-xs md:text-sm">
+                        <span class="block text-lg md:text-xl font-bold">199</span>
+                        <span>Hari</span>
+                    </div>
+                    <div
+                        class="bg-primary text-white px-3 py-2 md:px-4 md:py-3 rounded-lg shadow-md text-xs md:text-sm">
+                        <span class="block text-lg md:text-xl font-bold">05</span>
+                        <span>Jam</span>
+                    </div>
+                    <div
+                        class="bg-primary text-white px-3 py-2 md:px-4 md:py-3 rounded-lg shadow-md text-xs md:text-sm">
+                        <span class="block text-lg md:text-xl font-bold">36</span>
+                        <span>Menit</span>
+                    </div>
+                    <div
+                        class="bg-primary text-white px-3 py-2 md:px-4 md:py-3 rounded-lg shadow-md text-xs md:text-sm">
+                        <span class="block text-lg md:text-xl font-bold">05</span>
+                        <span>Detik</span>
+                    </div>
+                </div>
+                <button onclick="scrollToSection('akad')"
+                    class="mt-10 uppercase font-semibold px-6 py-3 bg-secondary text-white rounded-full shadow-md">
+                    detail acara
+                </button>
+            </div>
+
+        </section>
+
+        <section id="akad" class="flex items-center justify-center min-h-screen text-center px-4 bg-white/60">
+
+            <div class="relative text-center max-w-md">
+
+                <p class="text-3xl md:text-4xl text-primary text-center mb-10">
+                    بِسْـــــــــــــمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+                </p>
+
+                <p class="text-lg">Yang InsyaAllah akan diselenggarakan:</p>
+                <h2 class="text-3xl font-bold mt-2">Akad Nikah</h2>
+                <p class="text-2xl mt-2">Minggu,</p>
+                <p class="text-8xl font-bold mt-2">25</p>
+                <p class="text-2xl mt-2">Desember 2025</p>
+                <p class="text-lg">08.00 - 09.00 WIB</p>
+
+                <div class="flex justify-center items-center text-primary">
+                    <p>-</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                    </svg>
+                    <p>-</p>
+                </div>
+
+                <p class="mt-4 text-lg font-bold">Masjid An-Nur</p>
+                <p class="text-sm">Jl. Lorem Ipsum, Jakarta</p>
+
+                <button class="mt-6 px-6 py-3 bg-primary text-white rounded-full shadow-md">
+                    <a href="https://maps.app.goo.gl/U6mF4FeGSN5auD7E7">Open Maps</a>
+                </button>
+            </div>
+        </section>
+
+        <section id="mempelai" class="py-16 text-center bg-white/60">
+            <h2 class="text-4xl font-sacramento text-primary mb-20 font-semibold">Mempelai</h2>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-3 md:gap-6 max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center gap-3 md:gap-6 w-full">
+                    <div class="text-center md:text-right md:w-1/2">
+                        <h3 class="text-2xl font-bold">Putra</h3>
+                        <p class="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum molestiae magnam
+                            alias sapiente saepe earum cupiditate commodi facilis</p>
+                    </div>
+                    <img src="" alt="Mempelai Pria" class="galeri w-32 h-32 md:w-40 md:h-40 rounded-full shadow-md">
+                </div>
+
+                <div class="flex flex-col md:flex-row-reverse items-center gap-3 md:gap-6 w-full">
+                    <div class="text-center md:text-left md:w-1/2">
+                        <h3 class="text-2xl font-bold">Putri</h3>
+                        <p class="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum molestiae magnam
+                            alias sapiente saepe earum cupiditate commodi facilis</p>
+                    </div>
+                    <img src="" alt="Mempelai Wanita" class="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-md">
+                </div>
+            </div>
+
+            <div
+                class="flex flex-col text-white items-center text-center max-w-sm sm:max-w-md mx-auto mt-12 sm:mt-20 p-4 sm:p-6 md:p-8 bg-primary rounded-tr-3xl rounded-br-3xl rounded-bl-3xl">
+                <p class="text-xs sm:text-sm">
+                    "Dan di antara tanda-tanda kekuasaan-Nya adalah Dia menciptakan untukmu, dari dirimu sendiri,
+                    pasangan-pasangan, agar kamu tenang di dalamnya, dan Dia menjadikan di antara kamu cinta dan kasih
+                    sayang. Sesungguhnya pada yang demikian itu terdapat tanda-tanda bagi kaum yang berpikir."
+                </p>
+                <p class="mt-6 sm:mt-8 text-xs sm:text-sm">QS Ar-Rum : 21</p>
+            </div>
+        </section>
+        <section id="galeri" class="py-16 text-center bg-white/60">
+            <h2 class="text-4xl font-sacramento text-primary mb-10 font-semibold">Galeri</h2>
+
+            <div class="max-w-4xl mx-auto grid grid-cols-2 gap-4 px-4">
+                <img src="src/img/foto1.jpg" alt="Mempelai 1"
+                    class="gallery-photo w-full h-40 object-cover rounded-lg shadow-md opacity-0 scale-90 transition-all duration-[1200ms] ease-out delay-200">
+                <img src="src/img/foto2.jpg" alt="Mempelai 2"
+                    class="gallery-photo w-full h-40 object-cover rounded-lg shadow-md opacity-0 scale-90 transition-all duration-[1200ms] ease-out delay-400">
+                <img src="src/img/foto3.jpg" alt="Mempelai 3"
+                    class="gallery-photo w-full h-40 object-cover rounded-lg shadow-md opacity-0 scale-90 transition-all duration-[1200ms] ease-out delay-600">
+                <img src="src/img/foto4.jpg" alt="Mempelai 4"
+                    class="gallery-photo w-full h-40 object-cover rounded-lg shadow-md opacity-0 scale-90 transition-all duration-[1200ms] ease-out delay-800">
+            </div>
+            <div class="mt-6 px-4">
+                <img src="src/img/foto-besar.jpg" alt="Foto Besar Mempelai"
+                    class="gallery-photo w-full max-w-4xl h-80 object-cover rounded-lg shadow-lg mx-auto opacity-0 scale-90 transition-all duration-700">
+            </div>
+        </section>
+    </section>
+    <button id="audio-toggle" onclick="toggleAudio()" class="fixed bottom-5 left-5 bg-primary p-3 rounded-full shadow-lg text-white">
+        <svg id="volume-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-volume-up" viewBox="0 0 16 16">
+            <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06m7.137 2.096a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0"/>
+        </svg>
+    </button>
+</body>
+
+</html>
